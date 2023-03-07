@@ -1,0 +1,45 @@
+.logo {
+
+  img {
+    @media (max-width: 425px) {
+      width: 250px;
+    }
+  }
+}
+
+.nav__container {
+
+  > div {
+    gap: 2.5rem;
+  }
+
+  .landing-nav {
+    background-color: #fff;
+    width: 258px;
+    height: 157px;
+
+    > div {
+      background-color: #fff;
+      gap: 1rem;
+      img, span {
+        background-color: #fff;
+      }
+      span {
+        color: #a82c30;
+        text-transform: uppercase;
+        font-style: italic;
+        font-weight: 800;
+      }
+    }
+    
+  }
+}
+
+/* Carousel */
+.carousel-control-prev-icon {
+  filter: invert(100%);
+}
+ 
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
