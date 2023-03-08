@@ -1,10 +1,11 @@
 export default {
-  mode: 'universal',
+  ssr: false,
+  target: 'static',
   /*
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Srixon Client',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,10 +18,6 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#fff' },
-  /*
    ** Global CSS
    */
   css: ['@assets/scss/app.scss'],
@@ -28,6 +25,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [],
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
   /*
    ** Nuxt.js dev-modules
    */
@@ -42,10 +41,5 @@ export default {
   /*
    ** Build configuration
    */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {},
-  },
+  build: {},
 }
