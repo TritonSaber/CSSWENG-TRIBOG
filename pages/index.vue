@@ -23,12 +23,15 @@
             <span>contacts</span>
           </div>
         </b-col>
-        <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
+        <NuxtLink to="/productLine">
+          <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
           <div class="d-flex align-items-center">
             <img src="../assets/images/inv_tracker.png" alt="inv_trckr">
             <span>inventory <br /> tracker</span>
           </div>
         </b-col>
+        </NuxtLink>
+        
         <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
           <div class="d-flex align-items-center">
             <img src="../assets/images/transaction_history.png" alt="transhis">
