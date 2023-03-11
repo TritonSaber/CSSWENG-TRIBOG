@@ -15,9 +15,9 @@
         color: #a82c30;
     }
     
-    .logo{
-        width: 250px;
-    }
+    // .logo{
+    //     width: 250px;
+    // }
 
     .additem__button{
         font-style: italic;
@@ -39,4 +39,29 @@
             background-color: #fff;
         }
     }
+     
+    .btable__container {
+        background-color: #fff;
+        >thead {
+            > tr{
+                > th {
+                    background-color: #a82c30;
+                    > div {
+                        background-color: #a82c30;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        >tbody{
+            background-color: #fff;
+            > tr {
+                background-color: #fff;
+                >td {
+                    background-color: #fff;
+                }
+            }
+        }
+    }
+    
 }

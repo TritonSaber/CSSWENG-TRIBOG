@@ -9,12 +9,12 @@
                     </div>
                 </b-col>
                 <b-col class="d-flex justify-content-end align-items-center">
-                    <b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img src="../assets/images/add.png" alt="add"></b-button>
+                    <b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img class="ml-2" src="../assets/images/add.png" alt="add"></b-button>
                 </b-col>
             </b-row>
         </b-container>
         
-        <b-container class="table__container">
+        <b-container class="table__container shadow">
             <b-row class="table-bg">
                 <b-col md="auto" class="m-2">
                     <b-form-input size="sm" v-model="text" placeholder="Search"></b-form-input>
@@ -27,11 +27,12 @@
                     :sort-by.sync="sortBy"
                     :sort-desc.sync="sortDesc"
                     sort-icon-left
+                    class="btable__container"
                 >
                     <template #cell(actions)="row">
-                        <span class="d-flex flex-inline">
-                            <b-button @click="updateItem(item)"><img src="../assets/images/update.png" alt="update"></b-button>
-                            <b-button @click="deleteItem(item)"><img src="../assets/images/delete.png" alt="delete"></b-button>
+                        <span class="d-flex flex-inline justify-content-center bg-white">
+                            <b-button squared class="p-0 bg-white border-white" @click="updateItem(item)"><img class="bg-white" src="../assets/images/update.png" alt="update"></b-button>
+                            <b-button squared class="p-0 ml-2 bg-white border-white" @click="deleteItem(item)"><img class="bg-white" src="../assets/images/delete.png" alt="delete"></b-button>
                         </span>
                     </template>
                 </b-table>
