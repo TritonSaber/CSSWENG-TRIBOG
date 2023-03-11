@@ -1,10 +1,4 @@
-.logo {
-    img {
-        @media (max-width: 425px) {
-            width: 250px;
-        }
-    }
-}
+
 
 .header__container{
     span {
@@ -14,8 +8,12 @@
     }
 }
 
-.table__container{
-    > div{
-        background-color: #fff;
+.main__table{
+    font-style: italic;
+    font-weight: 800;
+
+    thead{
+        background-color: #a82c30;
+        color:#fff;
     }
 }
