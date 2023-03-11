@@ -1,38 +1,37 @@
 <template>
     <div class="d-flex flex-column align-items-center">
         <b-container class="header__container">
-            <b-row>
-                <b-col align-v="end"><span>Product List</span></b-col>
+            <b-row class="mb-2">
+                <b-col class="d-flex align-items-center"><span>Product List</span></b-col>
                 <b-col>
                     <div class="logo">
                         <img src="../assets/images/SRIXON.png" alt="SRIXON">
                     </div>
                 </b-col>
-                <b-col>
-                    <b-button squared size="sm" class="float-right" align-v="center">Add New Product</b-button>
+                <b-col class="d-flex justify-content-end align-items-center">
+                    <b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img src="../assets/images/add.png" alt="add"></b-button>
                 </b-col>
             </b-row>
         </b-container>
-        <b-container>
-            <b-row>
-                <b-col md="auto" class="mb-3">
+        
+        <b-container class="table__container">
+            <b-row class="table-bg">
+                <b-col md="auto" class="m-2">
                     <b-form-input size="sm" v-model="text" placeholder="Search"></b-form-input>
                 </b-col>
-                <b-col></b-col>
             </b-row>
-            <b-row>
+            <b-row class="table-bg">
                 <b-table 
                     :items="items"
                     :fields="fields"
                     :sort-by.sync="sortBy"
                     :sort-desc.sync="sortDesc"
                     sort-icon-left
-                    class="main__table"
                 >
                     <template #cell(actions)="row">
-                        <span>
-                            <b-button @click="updateItem(item)">Update</b-button>
-                            <b-button @click="deleteItem(item)">Delete</b-button>
+                        <span class="d-flex flex-inline">
+                            <b-button @click="updateItem(item)"><img src="../assets/images/update.png" alt="update"></b-button>
+                            <b-button @click="deleteItem(item)"><img src="../assets/images/delete.png" alt="delete"></b-button>
                         </span>
                     </template>
                 </b-table>
@@ -68,8 +67,8 @@
                         quantity: 23456, 
                         price: 69000.00, 
                         soldItems: 20000, 
-                        createdAt: 'YYYY-MM-DD', 
-                        updatedAt: 'YYYY-MM-DD', 
+                        createdAt: 'YYYY-MM-DD HH:MM:SS', 
+                        updatedAt: 'YYYY-MM-DD HH:MM:SS', 
                     },
                     {
                         id: 'ghijkl', 
@@ -78,8 +77,8 @@
                         quantity: 5000, 
                         price: 10.00, 
                         soldItems: 1, 
-                        createdAt: 'YYYY-MM-DD', 
-                        updatedAt: 'YYYY-MM-DD', 
+                        createdAt: 'YYYY-MM-DD HH:MM:SS', 
+                        updatedAt: 'YYYY-MM-DD HH:MM:SS', 
                     }
                 ],
             }
