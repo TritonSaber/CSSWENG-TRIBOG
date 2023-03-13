@@ -9,12 +9,12 @@
                     </div>
                 </b-col>
                 <b-col class="d-flex justify-content-end align-items-center">
-                    <b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img class="ml-2" src="../assets/images/add.png" alt="add"></b-button>
+                    <NuxtLink to="/addProduct"><b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img class="ml-2" src="../assets/images/add.png" alt="add"></b-button></NuxtLink>
                 </b-col>
             </b-row>
         </b-container>
         
-        <b-container class="table__container shadow">
+        <b-container class="body__container shadow">
             <b-row class="table-bg">
                 <b-col md="auto" class="m-2">
                     <b-form-input size="sm" v-model="text" placeholder="Search"></b-form-input>
