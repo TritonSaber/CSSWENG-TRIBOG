@@ -31,13 +31,16 @@
                 >
                     <template #cell(actions)="row">
                         <span class="d-flex flex-inline justify-content-center bg-white">
-                            <b-button squared class="p-0 bg-white border-white" @click="updateItem(item)"><img class="bg-white" src="../assets/images/update.png" alt="update"></b-button>
-                            <b-button squared class="p-0 ml-2 bg-white border-white" @click="deleteItem(item)"><img class="bg-white" src="../assets/images/delete.png" alt="delete"></b-button>
+                            <NuxtLink to="/editProduct"><b-button squared class="p-0 bg-white border-white" @click="Item(item)"><img class="bg-white" src="../assets/images/update.png" alt="update"></b-button></NuxtLink>
+                            <b-button squared class="p-0 ml-2 bg-white border-white" @click="deleteItem(item)" v-b-modal="'delete-warn'"><img class="bg-white" src="../assets/images/delete.png" alt="delete"></b-button>
                         </span>
                     </template>
                 </b-table>
             </b-row>
         </b-container>
+        <b-modal id="delete-warn" title="Deleting a product">
+            Are you sure that you want to delete this item?
+        </b-modal>
     </div>
 </template>
 
