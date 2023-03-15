@@ -44,10 +44,6 @@
     </div>
 </template>
 
-<style lang="scss">
-    @import "../assets/scss/pages/_productLine.scss";
-</style>
-
 <script>
     export default{
         data(){
