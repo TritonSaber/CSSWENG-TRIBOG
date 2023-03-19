@@ -2,14 +2,14 @@
     <div class="d-flex flex-column align-items-center">
         <b-container class="header__container">
             <b-row class="mb-2">
-                <b-col class="d-flex align-items-center"><span>Product List</span></b-col>
+                <b-col class="d-flex align-items-center"><span>Delivery List</span></b-col>
                 <b-col>
                     <div class="logo">
                         <img src="../assets/images/SRIXON.png" alt="SRIXON">
                     </div>
                 </b-col>
                 <b-col class="d-flex justify-content-end align-items-center">
-                    <nuxt-link to="/addProduct"><b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Product<img class="ml-2" src="../assets/images/add.png" alt="add"></b-button></nuxt-link>
+                    <nuxt-link to="/addDelivery"><b-button squared size="sm" class="d-flex align-items-center additem__button">Add New Delivery<img class="ml-2" src="../assets/images/add.png" alt="add"></b-button></nuxt-link>
                 </b-col>
             </b-row>
         </b-container>
@@ -31,7 +31,7 @@
                 >
                     <template #cell(actions)="row">
                         <span class="d-flex flex-inline justify-content-center bg-white">
-                            <nuxt-link to="/editProduct"><b-button squared class="p-0 bg-white border-white" @click="Item(item)"><img class="bg-white" src="../assets/images/update.png" alt="update"></b-button></nuxt-link>
+                            <nuxt-link to="/editDelivery"><b-button squared class="p-0 bg-white border-white" @click="Item(item)"><img class="bg-white" src="../assets/images/update.png" alt="update"></b-button></nuxt-link>
                             <b-button squared class="p-0 ml-2 bg-white border-white" @click="deleteItem(item)" v-b-modal="'delete-warn'"><img class="bg-white" src="../assets/images/delete.png" alt="delete"></b-button>
                         </span>
                     </template>
@@ -49,37 +49,43 @@
         data(){
             return{
                 fields: [
-                    {key: 'id', label: 'Product ID', sortable: true},
+                    {key: 'id', label: 'Delivery ID', sortable: true},
+                    {key: 'deliveryDate', sortable: true},
+                    {key: 'productID', sortable: true},
                     {key: 'productName', sortable: true},
-                    {key: 'category', sortable: true},
                     {key: 'quantity', sortable: true},
-                    {key: 'price', sortable: true},
-                    {key: 'soldItems', sortable: true},
-                    {key: 'createdAt', sortable: true},
-                    {key: 'updatedAt', sortable: true},
+                    {key: 'status', sortable: true},
+                    {key: 'missingItems', sortable: true},
                     {key: 'actions', label: 'Actions'},
                 ],
                 items: [
                     {
                         id: 'abcdef', 
-                        productName: 'MARVIN', 
-                        category: 'POGI', 
-                        quantity: 23456, 
-                        price: 69000.00, 
-                        soldItems: 20000, 
-                        createdAt: 'YYYY-MM-DD HH:MM:SS', 
-                        updatedAt: 'YYYY-MM-DD HH:MM:SS', 
+                        deliveryDate: '2023-01-01', 
+                        productID: 12345, 
+                        productName: 'BANANA', 
+                        quantity: 5000, 
+                        status: 'To Be Delivered',
+                        missingItems: 0,
                     },
                     {
                         id: 'ghijkl', 
-                        productName: 'EUGENE', 
-                        category: 'PANGET', 
-                        quantity: 5000, 
-                        price: 10.00, 
-                        soldItems: 1, 
-                        createdAt: 'YYYY-MM-DD HH:MM:SS', 
-                        updatedAt: 'YYYY-MM-DD HH:MM:SS', 
-                    }
+                        deliveryDate: '2023-02-02', 
+                        productID: 67890, 
+                        productName: 'APPLE', 
+                        quantity: 2000, 
+                        status: 'Delivered',
+                        missingItems: 0,
+                    },
+                    {
+                        id: 'lmnopq', 
+                        deliveryDate: '2023-03-03', 
+                        productID: 11121, 
+                        productName: 'ORANGE', 
+                        quantity: 1000, 
+                        status: 'Incomplete',
+                        missingItems: 0,
+                    },
                 ],
             }
         },
