@@ -172,6 +172,7 @@ export default {
         const response = await this.$axios.$get(`${process.env.baseUrl}/products-collection`, {
           params: {
             keyword: this.searchParams,
+            page: this.currentPage,
           }
         })
 
