@@ -1,13 +1,8 @@
 <template>
-  <div class="d-flex flex-column mt-4">
-    <b-container class="d-flex flex-column align-items-center">
-      <div class="logo">
-        <img src="../assets/images/SRIXON.png" alt="SRIXON">
-      </div>
-      <div>
-        <LandingCarousel />
-      </div>
-    </b-container>
+  <CommonContainer>
+    <CommonHeadingDetails />
+
+    <LandingCarousel />
 
     <b-container class="mt-4 nav__container d-flex justify-content-center">
       <b-row align-v="center">
@@ -43,7 +38,7 @@
         </nuxt-link>
       </b-row>
     </b-container>
-  </div>
+  </CommonContainer>
 </template>
 
 <script>
