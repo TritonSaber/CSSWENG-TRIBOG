@@ -43,25 +43,8 @@
      
     .btable__container {
         background-color: #fff;
-        >thead {
-            > tr{
-                > th {
-                    background-color: #a82c30;
-                    > div {
-                        background-color: #a82c30;
-                        color: #fff;
-                    }
-                }
-            }
-        }
-        >tbody{
+        > tbody{
             background-color: #fff;
-            > tr {
-                background-color: #fff;
-                >td {
-                    background-color: #fff;
-                }
-            }
         }
     }
     

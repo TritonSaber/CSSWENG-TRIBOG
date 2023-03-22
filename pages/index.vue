@@ -5,7 +5,7 @@
         <img src="../assets/images/SRIXON.png" alt="SRIXON">
       </div>
       <div>
-        <Carousel />
+        <LandingCarousel />
       </div>
     </b-container>
 
@@ -25,7 +25,7 @@
             <span>contacts</span>
           </div>
         </b-col>
-        <nuxt-link to="/productLine">
+        <nuxt-link to="/products">
           <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
             <div class="d-flex align-items-center">
               <img src="../assets/images/inv_tracker.png" alt="inv_trckr">
@@ -47,9 +47,5 @@
 </template>
 
 <script>
-import Carousel from '../components/Landing/Carousel/Carousel'
-
-export default {
-  components: { Carousel },
-}
+export default {}
 </script>

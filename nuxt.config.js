@@ -15,12 +15,19 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+      },
+    ],
   },
   /*
    ** Global CSS
    */
-  css: ['@assets/scss/app.scss'],
+  css: ['@assets/scss/app.scss', 'vue-select/dist/vue-select.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -37,7 +44,12 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios',
   ],
+  env: {
+    baseUrl: process.env.API_BASE_URL,
+  },
   /*
    ** Build configuration
    */
