@@ -7,6 +7,7 @@
   >
     <!-- edit form -->
     <b-form class="generic-form">
+      {{ requestParams }}
       <b-form-group>
         <b-row>
           <b-col>
@@ -108,6 +109,7 @@ export default {
         quantity: 0,
         cost: 0,
         quantity_sold: 0,
+        updated_at: new Date(),
       }
     }
   },
@@ -142,6 +144,7 @@ export default {
         quantity: 0,
         cost: 0,
         quantity_sold: 0,
+        updated_at: new Date(),
       }
     }
   },
@@ -170,16 +173,19 @@ export default {
     },
 
     requestParams() {
-      return this.formData
+      return {
+        ...this.formData,
+        updated_at: new Date(),
+      }
     },
   },
 
   watch: {
     product(newValue) {
       if (newValue) {
-        const { product_name, product_line, quantity, cost, quantity_sold } = newValue
+        const { product_name, product_line, quantity, cost, quantity_sold, updated_at } = newValue
 
-        this.formData = { product_name, product_line, quantity, cost, quantity_sold }
+        this.formData = { product_name, product_line, quantity, cost, quantity_sold, updated_at }
       }
     }
   },
