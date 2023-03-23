@@ -11,6 +11,33 @@
       sort-icon-left
       ref="paginatedTable"
     >
+    <!-- add new tag in id -->
+    <template #cell(id)="row">
+      <div 
+        class="d-flex align-items-center"
+        :class="[
+          row.item.isNew
+            ? 'justify-content-between'
+            : 'justify-content-end',
+        ]"
+      >
+        <div v-if="row.item.isNew" class="tag new mr-2">NEW</div>
+        {{ row.item.id }}
+      </div>
+    </template>
+
+    <!-- popper for product name and product category -->
+    <template #cell(product_name)="row">
+      <div class="product-description" v-b-popover.hover.top="row.item.product_name">
+        {{ row.item.product_name }}
+      </div>
+    </template>
+    <template #cell(product_line)="row">
+      <div class="product-description" v-b-popover.hover.top="row.item.product_line">
+        {{ row.item.product_line }}
+      </div>
+    </template>
+
     <!-- format cost -->
     <template #cell(cost)="row">
       {{ numberFormat(row.item.cost) }}
@@ -102,14 +129,14 @@ export default {
           key: 'product_name', 
           sortable: true,
           thClass: 'thead',
-          tdClass: 'tbody',
+          tdClass: 'tbody text-center',
         },
         {
           label: 'Category',
           key: 'product_line', 
           sortable: true,
           thClass: 'thead',
-          tdClass: 'tbody',
+          tdClass: 'tbody text-center',
         },
         {
           label: 'Quantity',
@@ -156,6 +183,7 @@ export default {
 
       selectedProduct: null,
       isDeleting: false,
+      isAdding: false,
       isEditing: false,
     }
   },
@@ -230,7 +258,8 @@ export default {
   computed: {
     products() {
       const products = this.data.map((product) => ({
-        ...product
+        ...product,
+        isNew: this.isNew(product.created_at),
       }))
 
       return _.sortBy(products, ['product_name'])
@@ -242,6 +271,10 @@ export default {
   },
 
   created() {
+    this.$nuxt.$on('addedProduct', (isAdding) => {
+      this.isAdding = isAdding
+    })
+
     this.$nuxt.$on('editedProduct', (isEditing) => {
       this.isEditing = isEditing
     })
@@ -250,6 +283,11 @@ export default {
   watch: {
     search() {
       this.getProducts()
+    },
+
+    isAdding() {
+      this.getProducts()
+      this.isAdding = true
     },
 
     isEditing() {
@@ -263,3 +301,21 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.tag.new {
+  color: white;
+  background-color: green;
+  padding: 4px 10px;
+  font-size: 8px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.product-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

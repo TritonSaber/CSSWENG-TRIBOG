@@ -10,12 +10,7 @@
       <b-col 
         class="d-flex justify-content-end align-items-center"
       >
-        <nuxt-link :to="route" v-if="details">
-          <b-button squared size="sm" class="d-flex align-items-center additem__button">
-            {{ details }}
-            <img class="ml-2" src="~/assets/images/add.png" alt="add">
-          </b-button>
-        </nuxt-link>
+        <slot />
       </b-col>
     </b-row>
   </b-container>
@@ -28,16 +23,6 @@ export default {
       type: String,
       default: '',
     },
-
-    details: {
-      type: String,
-      default: '',
-    },
-
-    route: {
-      type: String,
-      default: '/',
-    }
   }
 }
 </script>
