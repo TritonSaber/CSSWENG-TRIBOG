@@ -17,6 +17,12 @@ export default {
         maximumFractionDigits: 2,
       })
     },
+
+    isNew(createdAt) {
+      return (
+        moment(new Date()).diff(moment(createdAt), 'minutes') <= 1
+      )
+    },
   },
 
   filters: {
