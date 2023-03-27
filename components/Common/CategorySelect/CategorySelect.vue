@@ -78,6 +78,10 @@ export default {
           id: 'golf_bag',
           name: 'Golf Bag',
         },
+        {
+          id: 'golf_club',
+          name: 'Golf Club',
+        },
       ],
 
       fetchingResource: false,
