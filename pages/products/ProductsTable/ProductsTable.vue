@@ -287,7 +287,7 @@ export default {
 
     isAdding() {
       this.getProducts()
-      this.isAdding = true
+      this.isAdding = false
     },
 
     isEditing() {
