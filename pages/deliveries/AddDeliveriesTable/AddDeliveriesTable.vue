@@ -44,6 +44,10 @@
           </b-col>
           <b-col>
             <!-- status -->
+            <CommonStatusSelect
+              type="status"
+              v-on:statusChanges="$event => setStatus($event)"
+            />
             
           </b-col>
           <b-col>

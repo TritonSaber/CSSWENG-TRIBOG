@@ -24,12 +24,37 @@
         {{ row.item.id }}
       </div>
     </template>
+
+    <template #cell(created_at)="row">
+      {{ row.item.created_at | formatDate }}
+    </template>
+
+    <template #cell(actions)="row">
+      <div class="d-flex align-items-center justify-content-center bg-white">
+        <CommonActionButton
+          icon="edit bg-white"
+          v-on:click="$event => showEditDeliveriesModal(row.item)"
+        />
+        <CommonActionButton
+          icon="trash bg-white"
+          childClass="danger ml-3"
+          v-on:click="$event => showDeleteDeliveriesModal(row.item)"
+        />
+      </div>
+    </template>
+
     </b-table>
     <CommonPagination
       :currentPageCount="currentPageCount"
       :totalRows="totalRows"
       :perPage="limitPerPage"
       @pageChange="fetchPage"
+    />
+
+    <CommonDeleteModal
+      type="Delivery"
+      :isDeleting="isDeleting"
+      v-on:click="deleteDelivery"
     />
   </div>
 </template>
@@ -190,7 +215,7 @@ export default {
         this.$bvModal.hide('delete-modal')
         this.isDeleting = false
 
-        this.getProducts()
+        this.getDeliveries()
       }
     }
   },

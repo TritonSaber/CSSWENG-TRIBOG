@@ -40,7 +40,7 @@
 
     <!-- format cost -->
     <template #cell(cost)="row">
-      {{ numberFormat(row.item.cost) }}
+      PHP {{ numberFormat(row.item.cost) }}
     </template>
 
     <!-- format date -->
