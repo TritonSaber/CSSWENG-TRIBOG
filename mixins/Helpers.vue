@@ -16,6 +16,10 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })
+     
+      // const parts = value.toFixed(2).toString().split('.');
+      // parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      // return parts.join('.');
     },
 
     isNew(createdAt) {
