@@ -4,15 +4,17 @@
 
         <multiselect
             v-model="selectedProduct"
-            :options="data"
+            :options="products"
             :multiple="multiple"
-            :close-on-select="false"
+            :close-on-select="!multiple"
+            :clear-on-select="false"
             :preserve-search="true"
             :placeholder="placeholder"
             track-by="name"
             label="name"
             :searchable="true"
             :showLabels="false"
+            :disabled="disabled"
             :loading="fetchingResource"
             ref="productSelect"
 
@@ -50,6 +52,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        }
 
     },
 
@@ -67,7 +73,7 @@ export default {
         }
     },
 
-    methods: {
+    methods: { 
         async toggleBusy() {
             this.isBusy = !this.isBusy
         },
@@ -76,12 +82,7 @@ export default {
             this.toggleBusy()
 
             try {
-                const response = await this.$axios.$get(`${process.env.baseUrl}/products-collection`, {
-                    params: {
-                        keyword: this.searchParams,
-                        page: this.currentPage,
-                    }
-                })
+                const response = await this.$axios.$get(`${process.env.baseUrl}/products-collection`)
 
                 this.data = response.data
                 this.loading = false
@@ -100,22 +101,22 @@ export default {
 
     computed: {
         products() {
-            const products = this.data.map((product) => ({
-                ...product
+            return this.data.map((product) => ({
+                id: product.id,
+                name: product.product_name,
             }))
-
-            return _.sortBy(products, ['product_name'])
         },
     },
 
     watch: {
-        mounted() {
-            this.getProducts()
-        },
-
         selectedProduct(newValue){
             this.$emit('productChanges', newValue)
         }
-    }
+    },
+
+    mounted(){
+        this.getProducts()
+    },
+
 }
 </script>
