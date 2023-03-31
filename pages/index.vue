@@ -14,12 +14,14 @@
               </div>
           </b-col>
         </nuxt-link>
-        <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
-          <div class="d-flex align-items-center">
-            <img src="../assets/images/Contacts.png" alt="contacts">
-            <span>contacts</span>
-          </div>
-        </b-col>
+        <nuxt-link to="/contacts">
+          <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
+            <div class="d-flex align-items-center">
+              <img src="../assets/images/Contacts.png" alt="contacts">
+              <span>contacts</span>
+            </div>
+          </b-col>
+        </nuxt-link>
         <nuxt-link to="/products">
           <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
             <div class="d-flex align-items-center">
