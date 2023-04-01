@@ -5,7 +5,7 @@
     <LandingCarousel />
 
     <b-container class="mt-4 nav__container d-flex justify-content-center">
-      <b-row align-v="center">
+      <b-row align-v="center" class="justify-content-center">
         <nuxt-link to="/deliveries">
           <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center">
