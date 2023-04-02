@@ -17,7 +17,7 @@
             :disabled="disabled"
             :loading="fetchingResource"
             ref="productSelect"
-
+            @infinite="loadMore"
         >
             <template slot="noOptions">
                 <div v-if="fetchingResource">Loading {{ type }}</div>
@@ -69,6 +69,11 @@ export default {
             loading: true,
             hasError: false,
 
+            limitPerPage: 10,
+            currentPageCount: 0,
+            currentPage: 1,
+            totalRows: 0,
+
             fetchingResource: false,
         }
     },
@@ -78,11 +83,18 @@ export default {
             this.isBusy = !this.isBusy
         },
 
-        async getProducts() {
+        async getProducts(page) {
             this.toggleBusy()
 
             try {
-                const response = await this.$axios.$get(`${process.env.baseUrl}/products-collection`)
+                const response = await this.$axios.$get(`${process.env.baseUrl}/products-collection`,{
+                    params: {
+                        page: this.currentPage,
+                    }
+                })
+
+                this.currentPageCount = response.meta.to
+                this.totalRows = response.meta.total
 
                 this.data = response.data
                 this.loading = false
@@ -97,6 +109,13 @@ export default {
             }
         },
 
+        async loadMore() {
+            const nextPage = this.page + 1
+            const newProducts = await this.getProducts(nextPage)
+            this.products = this.products.concat(newProducts)
+            this.page = nextPage
+        }
+
     },
 
     computed: {
@@ -110,13 +129,17 @@ export default {
 
     watch: {
         selectedProduct(newValue){
+            console.log(newValue)
             this.$emit('productChanges', newValue)
         }
     },
 
     mounted(){
-        this.getProducts()
+        this.getProducts(this.page)
     },
 
 }
-</script>
+</script> 
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>

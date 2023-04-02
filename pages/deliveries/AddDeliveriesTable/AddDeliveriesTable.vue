@@ -80,6 +80,9 @@
   </b-modal>
 </template>
 
+<style>
+</style>
+
 <script>
 import Helpers from '~/mixins/Helpers'
 
@@ -91,7 +94,7 @@ export default {
       submitting: false,
 
       formData: {
-        deliveryDate: '',
+        // deliveryDate: '',
         product_id: 0,
         expected_quantity: 0,
         status: '',
@@ -126,7 +129,7 @@ export default {
     },
 
     setProduct(product) {
-      this.formData.productId = product ? product.product_name : '';
+      this.formData.product_id = product.id;
     },
 
     setStatus(status) {
@@ -141,7 +144,7 @@ export default {
 
     resetFormData() {
       this.formData = {
-        deliveryDate: '',
+        // deliveryDate: '',
         product_id: 0,
         expected_quantity: 0,
         status: '',
@@ -175,9 +178,9 @@ export default {
 
     requestParams() {
       return {
-        status: String(this.formData.status),
         product_id: Number(this.formData.product_id),
         expected_quantity: Number(this.formData.expected_quantity),
+        status: String(this.formData.status),
         current_quantity: Number(this.formData.current_quantity),
       }
     },
