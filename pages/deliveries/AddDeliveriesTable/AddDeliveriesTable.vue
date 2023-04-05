@@ -116,7 +116,7 @@ export default {
 
         this.$bvModal.hide('add-delivery-modal')
 
-        this.$nuxt.$emit('addedDelivey', true)
+        this.$nuxt.$emit('addedDelivery', true)
 
         this.resetFormData()
       }

@@ -188,7 +188,7 @@ export default{
     },
 
     watch: {
-        product(newValue) {
+        delivery(newValue) {
             if(newValue) {
                 const {product_id, expected_quantity, status, current_quantity} = newValue
 
