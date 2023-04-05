@@ -17,7 +17,7 @@
                     :class="[
                         row.item.isNew
                         ? 'justify-content-between'
-                        : 'justify-conent-end',
+                        : 'justify-content-end',
                     ]"
                 >
                     <div v-if="row.item.isNew" class="tag new mr-2">NEW</div>
