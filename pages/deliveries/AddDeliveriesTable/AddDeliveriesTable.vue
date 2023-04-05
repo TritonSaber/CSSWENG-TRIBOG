@@ -14,7 +14,7 @@
             <b-form-datepicker 
               id="delivery-date" 
               v-model="formData.deliveryDate"
-              required
+              
             ></b-form-datepicker>
           </b-col>
           <b-col>
@@ -30,14 +30,14 @@
         <b-row>
           <b-col>
             <!-- expected quantity -->
-            <label for="exp-quantity">Expected Quantity <span>*</span></label>
+            <label for="expected-quantity">Expected Quantity <span>*</span></label>
             <b-form-input 
-              id="exp-quantity"
+              id="expected-quantity"
               type="number"
               min="0"
               placeholder="Enter Expected Quantity"
               required
-              v-model="formData.expQuantity"
+              v-model="formData.expected_quantity"
               @keydown="preventDecimal"
               @blur="setExpQuantityToZero"
             ></b-form-input>
@@ -52,14 +52,14 @@
           </b-col>
           <b-col>
             <!-- current quantity -->
-            <label for="exp-quantity">Current Quantity <span>*</span></label>
+            <label for="current-quantity">Current Quantity <span>*</span></label>
             <b-form-input 
-              id="curr-quantity"
+              id="current-quantity"
               type="number"
               min="0"
               placeholder="Enter Current Quantity"
               required
-              v-model="formData.expQuantity"
+              v-model="formData.current_quantity"
               @keydown="preventDecimal"
               @blur="setCurrQuantityToZero"
             ></b-form-input>
@@ -67,8 +67,21 @@
         </b-row>
       </b-form-group>
     </b-form>
+    <template #modal-footer="{cancel}">
+      <b-button @click="cancel()">Cancel</b-button>
+      <b-button
+        type="submit"
+        class="btn-info"
+        @click="submit"
+        
+      >
+        Add</b-button>
+    </template>
   </b-modal>
 </template>
+
+<style>
+</style>
 
 <script>
 import Helpers from '~/mixins/Helpers'
@@ -81,10 +94,11 @@ export default {
       submitting: false,
 
       formData: {
-        deliveryDate: '',
-        expQuantity: 0,
+        // deliveryDate: '',
+        product_id: 0,
+        expected_quantity: 0,
         status: '',
-        currQuantity: 0,
+        current_quantity: 0,
       }
     }
   },
@@ -102,33 +116,74 @@ export default {
 
         this.$bvModal.hide('add-delivery-modal')
 
-        this.$nuxt.$emit('addedDelivey', true)
+        this.$nuxt.$emit('addedDelivery', true)
 
         this.resetFormData()
       }
     },
 
     setExpQuantityToZero() {
-      if(!this.formData.expQuantity) {
-        this.formData.expQuantity = 0;
+      if(!this.formData.expected_quantity) {
+        this.formData.expected_quantity = 0;
       }
     },
 
-    setCategory(category) {
-      this.formData.status = category ? category.name : '';
+    setProduct(product) {
+      this.formData.product_id = product.id;
+    },
+
+    setStatus(status) {
+      this.formData.status = status ? status.name : '';
     },
     
     setCurrQuantityToZero(){
-      if(!this.formData.currQuantity) {
-        this.formData.currQuantity = 0;
+      if(!this.formData.current_quantity) {
+        this.formData.current_quantity = 0;
       }
     },
 
     resetFormData() {
       this.formData = {
-        expQuantity: 0,
+        // deliveryDate: '',
+        product_id: 0,
+        expected_quantity: 0,
+        status: '',
+        current_quantity: 0,
       }
     }
   },
+
+  computed: {
+    enableSubmit() {
+      return (
+        // this.formData.deliveryDate &&
+        this.productIdParams &&
+        this.expQuantityParams &&
+        this.status &&
+        this.currQuantityParams
+      )
+    },
+
+    productIdParams() {
+      return(this.formData.product_id >= 0)
+    },
+
+    expQuantityParams() {
+      return(this.formData.expected_quantity >= 0)
+    },
+
+    currQuantityParams() {
+      return(this.formData.current_quantity >= 0)
+    },
+
+    requestParams() {
+      return {
+        product_id: Number(this.formData.product_id),
+        expected_quantity: Number(this.formData.expected_quantity),
+        status: String(this.formData.status),
+        current_quantity: Number(this.formData.current_quantity),
+      }
+    },
+  }
 }
 </script>
