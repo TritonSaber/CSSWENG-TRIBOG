@@ -30,7 +30,7 @@
             </div>
           </b-col>
         </nuxt-link>
-        <nuxt-link to="/transactions">
+        <nuxt-link to="/transactionHistory">
           <b-col class="landing-nav shadow mb-3 d-flex justify-content-center align-items-center">
             <div class="d-flex align-items-center">
               <img src="../assets/images/transaction_history.png" alt="transhis">
