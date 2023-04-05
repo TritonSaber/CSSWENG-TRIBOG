@@ -67,19 +67,19 @@
         
         statusOptions: [
           {
-            id: 'tbd',
+            value: 'tbd',
             name: 'To Be Delivered',
           },
           {
-            id: 'delivered',
+            value: 'delivered',
             name: 'Delivered',
           },
           {
-            id: 'complete',
+            value: 'complete',
             name: 'Complete',
           },
           {
-            id: 'incomplete',
+            value: 'incomplete',
             name: 'Incomplete',
           },
         ],

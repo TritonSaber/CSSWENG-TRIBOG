@@ -27,6 +27,17 @@ export default {
         moment(new Date()).diff(moment(createdAt), 'minutes') <= 1
       )
     },
+    
+    infiniteScrollScrollPagination(elementRef, bottomLimit, callback) {
+      elementRef.onscroll = () => {
+        const scrollY = elementRef.scrollHeight - elementRef.scrollTop
+        const height = elementRef.offsetHeight
+        const offset = height - scrollY
+        if (offset >= bottomLimit) {
+          callback()
+        }
+      }
+    },
   },
 
   filters: {
