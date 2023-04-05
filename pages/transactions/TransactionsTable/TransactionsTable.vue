@@ -62,7 +62,7 @@
     @pageChange="fetchPage"
   />
 
-  <EditTransactionsTable :product="selectedProduct" />
+  <EditTransactionsTable :transaction="selectedTransaction" />
 
   <CommonDeleteModal 
     type="Transaction"
@@ -162,7 +162,7 @@ export default {
         },
       ],
 
-      selectedProduct: null,
+      selectedTransaction: null,
       isDeleting: false,
       isAdding: false,
       isEditing: false,

@@ -91,7 +91,7 @@ export default {
       this.submitting = true
 
       try {
-        await this.$axios.$post(`${process.env.baseUrl}/transactions-update/${this.transaction.id}`, this.requestParams)
+        await this.$axios.$put(`${process.env.baseUrl}/transactions-update/${this.transaction.id}`, this.requestParams)
       } catch (e) {
         console.log(e)
       } finally {
@@ -105,6 +105,10 @@ export default {
       }
     },
 
+    setProduct(product) {
+      this.formData.product_id = product.id;
+    },
+
     setQuantityToZero() {
       if (!this.formData.quantity) {
         this.formData.quantity = 0;
@@ -112,8 +116,8 @@ export default {
     },
 
     setTotalCostToZero() {
-      if (!this.formData.cost) {
-        this.formData.cost = this.numberFormat(0);
+      if (!this.formData.total_cost) {
+        this.formData.total_cost = this.numberFormat(0);
       }
     },
 
@@ -138,14 +142,14 @@ export default {
     },
 
     totalCostParams() {
-      return (this.formData.cost >= 0)
+      return (this.formData.total_cost >= 0)
     },
 
     requestParams() {
       return {
         ...this.formData,
         quantity: Number(this.formData.quantity),
-        total_cost: Number(this.numberFormat(this.formData.cost)),
+        total_cost: Number(this.numberFormat(this.formData.total_cost)),
       }
     },
   },

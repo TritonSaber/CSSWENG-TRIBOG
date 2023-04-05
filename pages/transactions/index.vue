@@ -16,7 +16,7 @@
       <b-row class="table-bg">
         <b-col md="auto" class="my-2">
           <CommonSearchInput
-            placeholder="Search Products"
+            placeholder="Search Transaction"
             v-on:changed="search = $event"
           />
         </b-col>

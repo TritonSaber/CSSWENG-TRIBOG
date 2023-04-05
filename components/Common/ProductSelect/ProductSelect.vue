@@ -129,7 +129,6 @@ export default {
 
     watch: {
         selectedProduct(newValue){
-            console.log(newValue)
             this.$emit('productChanges', newValue)
         }
     },
