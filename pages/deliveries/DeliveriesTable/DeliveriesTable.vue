@@ -1,64 +1,64 @@
 <template>
-  <div>
-    <b-table
-      responsive
-      class="btable__container mb-0"
-      :fields="fields"
-      :items="deliveries"
-      :show-empty="!loading"
-      :busy="isBusy"
-      empty-text="There are no deliveries found!"
-      sort-icon-left
-      ref="paginatedTable"
-    >
-      <template #cell(id)="row">
-        <div 
-          class="d-flex align-items-center"
-          :class="[
-            row.item.isNew
-            ? 'justify-content-between'
-            : 'justify-conent-end',
-          ]"
+    <div>
+        <b-table
+            responsive
+            class="btable__container mb-0"
+            :fields="fields"
+            :items="deliveries"
+            :show-empty="!loading"
+            :busy="isBusy"
+            empty-text="There are no deliveries found!"
+            sort-icon-left
+            ref="paginatedTable"
         >
-          <div v-if="row.item.isNew" class="tag new mr-2">NEW</div>
-          {{ row.item.id }}
-        </div>
-      </template>
+            <template #cell(id)="row">
+                <div 
+                    class="d-flex align-items-center"
+                    :class="[
+                        row.item.isNew
+                        ? 'justify-content-between'
+                        : 'justify-conent-end',
+                    ]"
+                >
+                    <div v-if="row.item.isNew" class="tag new mr-2">NEW</div>
+                    {{ row.item.id }}
+                </div>
+            </template>
 
-      <template #cell(created_at)="row">
-        {{ row.item.created_at | formatDate }}
-      </template>
+            <template #cell(created_at)="row">
+                {{ row.item.created_at | formatDate }}
+            </template>
 
-      <template #cell(actions)="row">
-        <div class="d-flex align-items-center justify-content-center bg-white">
-          <CommonActionButton
-            icon="edit bg-white"
-            v-on:click="$event => showEditDeliveriesModal(row.item)"
-          />
-          <CommonActionButton
-            icon="trash bg-white"
-            childClass="danger ml-3"
-            v-on:click="$event => showDeleteDeliveriesModal(row.item)"
-          />
-        </div>
-      </template>
-    </b-table>
+            <template #cell(actions)="row">
+                <div class="d-flex align-items-center justify-content-center bg-white">
+                    <CommonActionButton
+                        icon="edit bg-white"
+                        v-on:click="$event => showEditDeliveriesModal(row.item)"
+                    />
+                    <CommonActionButton
+                        icon="trash bg-white"
+                        childClass="danger ml-3"
+                        v-on:click="$event => showDeleteDeliveriesModal(row.item)"
+                    />
+                </div>
+            </template>
+        </b-table>
 
-    <CommonPagination
-      :currentPageCount="currentPageCount"
-      :totalRows="totalRows"
-      :perPage="limitPerPage"
-      @pageChange="fetchPage"
-    />
+        <CommonPagination
+            :currentPageCount="currentPageCount"
+            :totalRows="totalRows"
+            :perPage="limitPerPage"
+            @pageChange="fetchPage"
+        />
 
-    <EditDeliveriesTable :delivery="selectedDelivery"/>
+        <EditDeliveriesTable :delivery="selectedDelivery"/>
 
-    <CommonDeleteModal
-      type="Delivery"
-      :isDeleting="isDeleting"
-      v-on:click="deleteDelivery"
-    />
-  </div>
+        <CommonDeleteModal
+            type="Delivery"
+            :isDeleting="isDeleting"
+            v-on:click="deleteDelivery"
+        />
+    </div>
 </template>
 
 <script>
@@ -261,3 +261,15 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.tag.new {
+    color: white;
+    background-color: green;
+    padding: 4px 10px;
+    font-size: 8px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+</style>

@@ -12,7 +12,7 @@
       </b-button>
     </CommonHeadingDetails>
 
-    <b-container class="body__continer shadow">
+    <b-container class="body__container shadow">
       <b-row class="table-bg">
         <b-col md="auto" class="my-2">
           <CommonSearchInput
