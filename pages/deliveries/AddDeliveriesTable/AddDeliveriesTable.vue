@@ -9,20 +9,19 @@
       <b-form-group>
         <b-row>
           <b-col>
-            <!-- delivery date -->
-            <label for="delivery-date">Delivery Date <span>*</span></label>
-            <b-form-datepicker 
-              id="delivery-date" 
-              v-model="formData.deliveryDate"
-              
-            ></b-form-datepicker>
-          </b-col>
-          <b-col>
             <!-- product select -->
             <CommonProductSelect
               type="product"
-              v-on:productChanges="$event => setProduct($event)"
+              refName="productSelect"
             />
+          </b-col>
+          <b-col>
+            <!-- status -->
+            <CommonStatusSelect
+              type="status"
+              v-on:statusChanges="$event => setStatus($event)"
+            />
+            
           </b-col>
         </b-row>
       </b-form-group>
@@ -43,14 +42,6 @@
             ></b-form-input>
           </b-col>
           <b-col>
-            <!-- status -->
-            <CommonStatusSelect
-              type="status"
-              v-on:statusChanges="$event => setStatus($event)"
-            />
-            
-          </b-col>
-          <b-col>
             <!-- current quantity -->
             <label for="current-quantity">Current Quantity <span>*</span></label>
             <b-form-input 
@@ -67,15 +58,16 @@
         </b-row>
       </b-form-group>
     </b-form>
+
     <template #modal-footer="{cancel}">
       <b-button @click="cancel()">Cancel</b-button>
       <b-button
         type="submit"
         class="btn-info"
         @click="submit"
-        
+        :disabled="submitting || !enableSubmit"
+        >Add</b-button
       >
-        Add</b-button>
     </template>
   </b-modal>
 </template>
@@ -94,7 +86,6 @@ export default {
       submitting: false,
 
       formData: {
-        // deliveryDate: '',
         product_id: 0,
         expected_quantity: 0,
         status: '',
@@ -129,7 +120,7 @@ export default {
     },
 
     setProduct(product) {
-      this.formData.product_id = product.id;
+      this.formData.product_id = product?.id ;
     },
 
     setStatus(status) {
@@ -144,8 +135,7 @@ export default {
 
     resetFormData() {
       this.formData = {
-        // deliveryDate: '',
-        product_id: 0,
+        product_id: null,
         expected_quantity: 0,
         status: '',
         current_quantity: 0,
@@ -156,16 +146,15 @@ export default {
   computed: {
     enableSubmit() {
       return (
-        // this.formData.deliveryDate &&
         this.productIdParams &&
+        this.formData.status &&
         this.expQuantityParams &&
-        this.status &&
         this.currQuantityParams
       )
     },
 
     productIdParams() {
-      return(this.formData.product_id >= 0)
+      return(this.formData.product_id >= 0 && this.formData.product_id !== null)
     },
 
     expQuantityParams() {
@@ -178,12 +167,19 @@ export default {
 
     requestParams() {
       return {
+        ...this.formData,
         product_id: Number(this.formData.product_id),
         expected_quantity: Number(this.formData.expected_quantity),
-        status: String(this.formData.status),
+        status: this.formData.status,
         current_quantity: Number(this.formData.current_quantity),
       }
     },
+  },
+
+  created() {
+    this.$nuxt.$on('productChanges-productSelect', (product_id) => {
+      this.setProduct(product_id)
+    })
   }
 }
 </script>
