@@ -6,7 +6,6 @@
     modal-class="generic-modal"
   >
     <b-form class="generic-form">
-      {{ requestParams }}
       <b-form-group>
         <b-row>
           <b-col>
