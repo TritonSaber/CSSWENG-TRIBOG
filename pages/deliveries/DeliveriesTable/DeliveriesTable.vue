@@ -72,6 +72,13 @@ export default {
 
     mixins: [Helpers],
 
+    props: {
+    search: {
+      type: String,
+      default: '',
+    }
+  },
+
     data() {
         return {
             data: [],
