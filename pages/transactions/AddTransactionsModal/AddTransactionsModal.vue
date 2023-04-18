@@ -6,7 +6,6 @@
     modal-class="generic-modal"
   >
     <b-form class="generic-form">
-      {{ requestParams }}
       <b-form-group>
         <b-row>
           <b-col>
@@ -37,9 +36,7 @@
             <label for="total_cost">Total Cost <span>*</span></label>
             <b-form-input
               id="total_cost"
-              type="number"
-              step="0.01"
-              min="0"
+              type="text"
               placeholder="0.00"
               required
               disabled
@@ -145,7 +142,11 @@ export default {
     },
 
     totalCost() {
-      return (this.formData.product_id?.cost * this.formData.quantity)
+      if (this.formData?.product_id) {
+        return (this.formData.product_id?.cost * this.formData.quantity)
+      }
+      
+      return 0
     },
 
     totalCostTextBox() {

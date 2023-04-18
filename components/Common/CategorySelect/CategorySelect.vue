@@ -82,6 +82,14 @@ export default {
           id: 'golf_club',
           name: 'Golf Club',
         },
+        {
+          id: 'equipment',
+          name: 'Equipment',
+        },
+        {
+          id: 'others',
+          name: 'Others',
+        },
       ],
 
       fetchingResource: false,
