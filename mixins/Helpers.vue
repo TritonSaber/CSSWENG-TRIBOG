@@ -12,7 +12,7 @@ export default {
 
     // number formatting
     numberFormat(value) {
-      return value.toLocaleString('en-US', {
+      return parseFloat(value).toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })
