@@ -20,10 +20,13 @@
             ></b-form-input>
           </b-col>
           <b-col>
-            <CommonCategorySelect
-              type="category"
-              v-on:categoryChanges="$event => setCategory($event)"
-            />
+            <label for="product-category">Product Category <span>*</span></label>
+            <b-form-input
+              id="product-category"
+              type="text"
+              disabled
+              v-model="formData.product_line"
+            ></b-form-input>
           </b-col>
         </b-row>
       </b-form-group>
@@ -134,10 +137,6 @@ export default {
 
         this.resetFormData()
       }
-    },
-
-    setCategory(category) {
-      this.formData.product_line = category ? category.name : '';
     },
 
     setQuantityToZero() {
