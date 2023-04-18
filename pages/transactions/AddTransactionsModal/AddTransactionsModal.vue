@@ -36,13 +36,11 @@
             <label for="total_cost">Total Cost <span>*</span></label>
             <b-form-input
               id="total_cost"
-              type="number"
-              step="0.01"
-              min="0"
-              placeholder="Enter Total Cost"
+              type="text"
+              placeholder="0.00"
               required
-              v-model="formData.total_cost"
-              @blur="setTotalCostToZero"
+              disabled
+              v-model="totalCostTextBox"
             ></b-form-input>
           </b-col>
         </b-row>
@@ -100,18 +98,12 @@ export default {
     },
 
     setProduct(product) {
-      this.formData.product_id = product?.id;
+      this.formData.product_id = product
     },
 
     setQuantityToZero() {
       if (!this.formData.quantity) {
-        this.formData.quantity = 0;
-      }
-    },
-
-    setTotalCostToZero() {
-      if (!this.formData.total_cost) {
-        this.formData.total_cost = this.numberFormat(0);
+        this.formData.quantity = 0
       }
     },
 
@@ -134,7 +126,9 @@ export default {
     },
 
     productIdParams() {
-      return(this.formData.product_id >= 0 && this.formData.product_id !== null)
+      return (this.formData.product_id?.id >= 0
+        && this.formData.product_id?.id !== null
+      )
     },
 
     quantityParams() {
@@ -142,15 +136,29 @@ export default {
     },
 
     totalCostParams() {
-      return (this.formData.total_cost >= 0)
+      return (this.formData.total_cost >= 0
+        && this.formData.total_cost !== null
+      )
+    },
+
+    totalCost() {
+      if (this.formData?.product_id) {
+        return (this.formData.product_id?.cost * this.formData.quantity)
+      }
+      
+      return 0
+    },
+
+    totalCostTextBox() {
+      return this.numberFormat(this.totalCost)
     },
 
     requestParams() {
       return {
         ...this.formData,
-        product_id: Number(this.formData.product_id),
+        product_id: Number(this.formData.product_id?.id),
         quantity: Number(this.formData.quantity),
-        total_cost: Number(this.formData.total_cost),
+        total_cost: this.totalCost,
       }
     },
   },
