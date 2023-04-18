@@ -62,7 +62,7 @@
     @pageChange="fetchPage"
   />
 
-  <EditTransactionsTable :transaction="selectedTransaction" />
+  <EditTransactionsModal :transaction="selectedTransaction" />
 
   <CommonDeleteModal 
     type="Transaction"
@@ -74,12 +74,12 @@
 </template>
 
 <script>
-import EditTransactionsTable from '../EditTransactionsTable/EditTransactionsTable'
+import EditTransactionsModal from '../EditTransactionsModal/EditTransactionsModal'
 import _ from 'lodash'
 import Helpers from '~/mixins/Helpers'
 
 export default {
-  components: { EditTransactionsTable },
+  components: { EditTransactionsModal },
 
   mixins: [Helpers],
 

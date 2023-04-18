@@ -24,17 +24,17 @@
 
       <DeliveriesTable :search="searchParam" />
 
-      <AddDeliveriesTable />
+      <AddDeliveriesModal />
     </b-container>
   </CommonContainer>
 </template>
 
 <script>
-import AddDeliveriesTable from './AddDeliveriesTable';
+import AddDeliveriesModal from './AddDeliveriesModal';
 import DeliveriesTable from './DeliveriesTable';
 
 export default {
-  components: { DeliveriesTable, AddDeliveriesTable },
+  components: { DeliveriesTable, AddDeliveriesModal },
 
   data() {
     return {

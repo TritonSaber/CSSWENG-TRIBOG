@@ -24,17 +24,17 @@
 
       <TransactionsTable :search="searchParam" />
       
-      <AddTransactionsTable />
+      <AddTransactionsModal />
     </b-container>
   </CommonContainer>
 </template>
 
 <script>
 import TransactionsTable from './TransactionsTable'
-import AddTransactionsTable from './AddTransactionsTable'
+import AddTransactionsModal from './AddTransactionsModal'
 
 export default {
-  components: { TransactionsTable, AddTransactionsTable },
+  components: { TransactionsTable, AddTransactionsModal },
 
   data() {
     return {
