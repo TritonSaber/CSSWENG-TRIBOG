@@ -171,6 +171,7 @@ export default {
         ...this.formData,
         quantity: Number(this.formData.quantity),
         total_cost: this.totalCost,
+        updated_at: new Date(),
       }
     },
   },
