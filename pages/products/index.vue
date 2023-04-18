@@ -24,17 +24,17 @@
 
       <ProductsTable :search="searchParam" />
       
-      <AddProductsTable />
+      <AddProductsModal />
     </b-container>
   </CommonContainer>
 </template>
 
 <script>
-import AddProductsTable from './AddProductsTable';
+import AddProductsModal from './AddProductsModal';
 import ProductsTable from './ProductsTable'
 
 export default {
-  components: { ProductsTable, AddProductsTable },
+  components: { ProductsTable, AddProductsModal },
 
   data() {
     return {

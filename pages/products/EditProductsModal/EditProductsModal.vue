@@ -1,10 +1,11 @@
 <template>
   <b-modal
-    id="add-product-modal"
+    id="edit-product-modal"
     centered
-    title="Add Product"
+    title="Edit Product"
     modal-class="generic-modal"
   >
+    <!-- edit form -->
     <b-form class="generic-form">
       <b-form-group>
         <b-row>
@@ -73,6 +74,7 @@
       </b-form-group>
     </b-form>
 
+    <!-- edit modal buttons -->
     <template #modal-footer="{ cancel }">
       <b-button @click="cancel()"> Cancel </b-button>
       <b-button
@@ -80,8 +82,9 @@
         class="btn-info"
         @click="submit"
         :disabled="submitting || !enableSubmit"
-        >Add</b-button
       >
+        Update
+      </b-button>
     </template>
   </b-modal>
 </template>
@@ -91,6 +94,13 @@ import Helpers from '~/mixins/Helpers'
 
 export default {
   mixins: [Helpers],
+
+  props: {
+    product: {
+      type: Object | null,
+      required: true,
+    }
+  },
 
   data() {
     return {
@@ -102,7 +112,8 @@ export default {
         quantity: 0,
         cost: this.numberFormat(0),
         quantity_sold: 0,
-      },
+        updated_at: new Date(),
+      }
     }
   },
 
@@ -111,15 +122,15 @@ export default {
       this.submitting = true
 
       try {
-        await this.$axios.$post(`${process.env.baseUrl}/products-create/`, this.requestParams)
+        await this.$axios.$put(`${process.env.baseUrl}/products-update/${this.product.id}`, this.requestParams)
       } catch (e) {
         console.log(e)
       } finally {
         this.submitting = false
 
-        this.$bvModal.hide('add-product-modal')
+        this.$bvModal.hide('edit-product-modal')
 
-        this.$nuxt.$emit('addedProduct', true)
+        this.$nuxt.$emit('editedProduct', true)
 
         this.resetFormData()
       }
@@ -154,6 +165,7 @@ export default {
         quantity: 0,
         cost: this.numberFormat(0),
         quantity_sold: 0,
+        updated_at: new Date(),
       }
     }
   },
@@ -161,7 +173,7 @@ export default {
   computed: {
     enableSubmit() {
       return (
-        this.formData.product_name &&
+        this.formData.product_name && 
         this.formData.product_line &&
         this.quantityParams &&
         this.costParams &&
@@ -185,10 +197,21 @@ export default {
       return {
         ...this.formData,
         quantity: Number(this.formData.quantity),
-        cost: Number(this.numberFormat(this.formData.cost)),
+        cost: Number(this.formData.cost),
         quantity_sold: Number(this.formData.quantity_sold),
+        updated_at: new Date(),
       }
     },
-  }
+  },
+
+  watch: {
+    product(newValue) {
+      if (newValue) {
+        const { product_name, product_line, quantity, cost, quantity_sold, updated_at } = newValue
+
+        this.formData = { product_name, product_line, quantity, cost, quantity_sold, updated_at }
+      }
+    }
+  },
 }
 </script>

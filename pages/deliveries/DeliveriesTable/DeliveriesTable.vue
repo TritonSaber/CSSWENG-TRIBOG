@@ -51,7 +51,7 @@
             @pageChange="fetchPage"
         />
 
-        <EditDeliveriesTable :delivery="selectedDelivery"/>
+        <EditDeliveriesModal :delivery="selectedDelivery"/>
 
         <CommonDeleteModal
             type="Delivery"
@@ -62,13 +62,13 @@
 </template>
 
 <script>
-import EditDeliveriesTable from '../EditDeliveriesTable'
+import EditDeliveriesModal from '../EditDeliveriesModal'
 import _ from 'lodash'
 import Helpers from '~/mixins/Helpers'
 
 
 export default {
-    components: { EditDeliveriesTable },
+    components: { EditDeliveriesModal },
 
     mixins: [Helpers],
 

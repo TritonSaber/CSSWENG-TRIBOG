@@ -74,7 +74,7 @@
     @pageChange="fetchPage"
   />
 
-  <EditProductsTable :product="selectedProduct" />
+  <EditProductsModal :product="selectedProduct" />
 
   <CommonDeleteModal 
     type="Product"
@@ -86,12 +86,12 @@
 </template>
 
 <script>
-import EditProductsTable from '../EditProductsTable/EditProductsTable'
+import EditProductsModal from '../EditProductsModal/EditProductsModal'
 import _ from 'lodash'
 import Helpers from '~/mixins/Helpers'
 
 export default {
-  components: { EditProductsTable },
+  components: { EditProductsModal },
 
   mixins: [Helpers],
 
