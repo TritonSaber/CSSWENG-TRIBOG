@@ -9,15 +9,6 @@
         <b-form-group>
           <b-row>
             <b-col>
-              <!-- delivery date -->
-              <label for="delivery-date">Delivery Date <span>*</span></label>
-              <b-form-datepicker 
-                id="delivery-date" 
-                v-model="formData.deliveryDate"
-                
-              ></b-form-datepicker>
-            </b-col>
-            <b-col>
               <!-- product select -->
               <CommonProductSelect
                 type="product"
@@ -166,24 +157,24 @@ export default{
         },
 
         productIdParams() {
-            return(this.formData.product_id >= 0)
+          return(this.formData.product_id >= 0)
         },
 
         expQuantityParams() {
-            return(this.formData.expected_quantity >= 0)
+          return(this.formData.expected_quantity >= 0)
         },
 
         currQuantityParams() {
-            return(this.formData.current_quantity >= 0)
+          return(this.formData.current_quantity >= 0)
         },
 
         requestParams() {
-            return {
-                product_id: Number(this.formData.product_id),
-                expected_quantity: Number(this.formData.expected_quantity),
-                status: String(this.formData.status),
-                current_quantity: Number(this.formData.current_quantity),
-            }
+          return {
+            product_id: Number(this.formData.product_id),
+            expected_quantity: Number(this.formData.expected_quantity),
+            status: String(this.formData.status),
+            current_quantity: Number(this.formData.current_quantity),
+          }
         },
     },
 
