@@ -9,10 +9,13 @@
       <b-form-group>
         <b-row>
           <b-col>
-            <CommonProductSelect
-              type="product"
-              v-on:productChanges="$event => setProduct($event)"
-            />
+            <label for="product-name">Product Name <span>*</span></label>
+            <b-form-input
+              id="product-name"
+              type="text"
+              disabled
+              v-model="productName"
+            ></b-form-input>
           </b-col>
           <b-col>
             <label for="quantity">Quantity <span>*</span></label>
@@ -35,14 +38,12 @@
           <b-col>
             <label for="total_cost">Total Cost <span>*</span></label>
             <b-form-input
-              id="price"
-              type="number"
-              step="0.01"
-              min="0"
-              placeholder="Enter Total Cost"
+              id="total_cost"
+              type="text"
+              placeholder="0.00"
               required
-              v-model="formData.total_cost"
-              @blur="setTotalCostToZero"
+              disabled
+              v-model="totalCostTextBox"
             ></b-form-input>
           </b-col>
         </b-row>
@@ -56,7 +57,7 @@
         class="btn-info"
         @click="submit"
         :disabled="submitting || !enableSubmit"
-        >Add</b-button
+        >Update</b-button
       >
     </template>
   </b-modal>
@@ -106,7 +107,7 @@ export default {
     },
 
     setProduct(product) {
-      this.formData.product_id = product.id;
+      this.formData.product_id = product;
     },
 
     setQuantityToZero() {
@@ -137,19 +138,40 @@ export default {
       )
     },
 
+    productName() {
+      if (this.transaction) {
+        return this.transaction.product_name
+      }
+    },
+
     quantityParams() {
       return (this.formData.quantity >= 0)
     },
 
     totalCostParams() {
-      return (this.formData.total_cost >= 0)
+      return (this.formData.total_cost >= 0
+        && this.formData.total_cost !== null
+      )
+    },
+
+    totalCost() {
+      if (this.transaction?.product_id) {
+        return (parseFloat(this.transaction.cost) * this.formData.quantity)
+      }
+      
+      return 0
+    },
+
+    totalCostTextBox() {
+      return this.numberFormat(this.totalCost)
     },
 
     requestParams() {
       return {
         ...this.formData,
         quantity: Number(this.formData.quantity),
-        total_cost: Number(this.formData.total_cost),
+        total_cost: this.totalCost,
+        updated_at: new Date(),
       }
     },
   },
