@@ -129,6 +129,7 @@ export default {
       return this.productCollection.map((product) => ({
         id: product.id,
         name: product.product_name,
+        cost: product.cost
       }))
     },
   },
