@@ -9,10 +9,20 @@
       <b-form-group>
         <b-row>
           <b-col>
-            <!-- product select -->
-            <CommonProductSelect
-              type="product"
-              v-on:productChanges="$event => setProduct($event)"
+            <label for="product-name">Product Name <span>*</span></label>
+            <b-form-input
+              id="product-name"
+              type="text"
+              disabled
+              v-model="productName"
+            ></b-form-input>
+          </b-col>
+          <b-col>
+            <!-- status -->
+            <CommonStatusSelect
+              type="status"
+              :defaultValue="currentStatus"
+              v-on:statusChanges="$event => setStatus($event)"
             />
           </b-col>
         </b-row>
@@ -32,14 +42,6 @@
               @keydown="preventDecimal"
               @blur="setExpQuantityToZero"
             ></b-form-input>
-          </b-col>
-          <b-col>
-            <!-- status -->
-            <CommonStatusSelect
-              type="status"
-              v-on:statusChanges="$event => setStatus($event)"
-            />
-            
           </b-col>
           <b-col>
             <!-- current quantity -->
@@ -64,6 +66,7 @@
       <b-button
         type="submit"
         class="btn-info"
+        :disabled="submitting || !enableSubmit"
         @click="submit"
       >
         Update</b-button>
@@ -91,7 +94,7 @@ export default{
       formData: {
         product_id: 0,
         expected_quantity: 0,
-        status: '',
+        status: null,
         current_quantity: 0,
       }
     }
@@ -127,7 +130,7 @@ export default{
     },
 
     setStatus(status) {
-      this.formData.status = status ? status.name : '';
+      this.formData.status = status
     },
         
     setCurrQuantityToZero(){
@@ -140,7 +143,7 @@ export default{
       this.formData = {
         product_id: 0,
         expected_quantity: 0,
-        status: '',
+        status: null,
         current_quantity: 0,
       }
     }
@@ -151,9 +154,19 @@ export default{
       return (
         this.productIdParams &&
         this.expQuantityParams &&
-        this.status &&
+        this.formData.status &&
         this.currQuantityParams
       )
+    },
+
+    productName() {
+      if (this.delivery) {
+        return this.delivery.product_name
+      }
+    },
+
+    currentStatus() {
+      return [this.delivery?.status]
     },
 
     productIdParams() {
@@ -172,7 +185,7 @@ export default{
       return {
         product_id: Number(this.formData.product_id),
         expected_quantity: Number(this.formData.expected_quantity),
-        status: String(this.formData.status),
+        status: this.formData.status,
         current_quantity: Number(this.formData.current_quantity),
       }
     },
