@@ -1,97 +1,65 @@
 <template>
-    <div>
-      <label for="status">{{ label }} <span>*</span></label>
+  <div>
+    <label for="status">{{ label }} <span>*</span></label>
+
+    <multiselect
+      id="status"
+      v-model="selectedStatus"
+      :options="statusOptions"
+      :placeholder="placeholder"
+      :searchable="false"
+      :show-labels="false"
+      ref="statusSelect"
+    ></multiselect>
+  </div>
+</template>
   
-      <multiselect
-        v-model="selectedStatus"
-        :options="statusOptions"
-        :multiple="multiple"
-        :close-on-select="!multiple"
-        :clear-on-select="false"
-        :preserve-search="true"
-        :placeholder="placeholder"
-        track-by="name"
-        label="name"
-        :searchable="true"
-        :showLabels="false"
-        :disabled="disabled"
-        :loading="fetchingResource"
-        ref="statusSelect"
-      >
-        <template slot="noOptions">
-          <div v-if="fetchingResource">Loading {{ type }}</div>
-          <div v-else>No {{ type }} found</div>
-        </template>
-      </multiselect>
-    </div>
-  </template>
-  
-  <script>
-  import Multiselect from 'vue-multiselect'
-  
-  export default {
-    components: {
-      Multiselect,
+<script>
+import Multiselect from 'vue-multiselect'
+
+export default {
+  components: { Multiselect },
+
+  props: {
+    label: {
+      type: String,
+      default: 'Status',
     },
-  
-    props: {
-      type: {
-        type: String,
-        default: 'type',
-      },
-  
-      label: {
-        type: String,
-        default: 'Status',
-      },
-  
-      placeholder: {
-        type: String,
-        default: 'Select Status',
-      },
-  
-      multiple: {
-        type: Boolean,
-        default: false,
-      },
-  
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
+
+    placeholder: {
+      type: String,
+      default: 'Select Status',
     },
-  
-    data() {
-      return {
-        selectedStatus: null,
-        
-        statusOptions: [
-          {
-            value: 'tbd',
-            name: 'To Be Delivered',
-          },
-          {
-            value: 'delivered',
-            name: 'Delivered',
-          },
-          {
-            value: 'complete',
-            name: 'Complete',
-          },
-          {
-            value: 'incomplete',
-            name: 'Incomplete',
-          },
-        ],
-  
-        fetchingResource: false,
-      }
+
+    defaultValue: {
+      type: Array,
+      default: () => [],
     },
-  
-    watch: {
-      selectedStatus(newValue) {
-        this.$emit('statusChanges', newValue)
-      }
+  },
+
+  data() {
+    return {
+      selectedStatus: this.defaultValue[0],
+      
+      statusOptions: [
+        'To Be Delivered',
+        'Delivered',
+        'Complete',
+        'Incomplete',
+      ],
+
+      fetchingResource: false,
     }
+  },
+
+  watch: {
+    selectedStatus(newValue) {
+      this.$emit('statusChanges', newValue)
+    }
+  },
+
+  mounted() {
+    this.$emit('statusChanges', this.selectedStatus)
   }
-  </script>
+}
+</script>
